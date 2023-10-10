@@ -32,6 +32,7 @@ local options = {
 	wrap = false,
 	sidescrolloff = 8,
 	guifont = "monospace:h17",
+  termguicolors = true
 }
 
 vim.opt.shortmess:append "c"
@@ -79,4 +80,3 @@ require("tokyonight").setup({
   on_highlights = function(highlights, colors) end,
 })
 
-vim.cmd.colorscheme "tokyonight"

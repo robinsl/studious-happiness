@@ -40,6 +40,18 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" 
   use "nvim-lua/popup.nvim" 
   use "nvim-lua/plenary.nvim"
+
+  -- cmp
+  use "hrsh7th/nvim-cmp" 
+  use "hrsh7th/cmp-buffer" 
+  use "hrsh7th/cmp-path" 
+  use "hrsh7th/cmp-cmdline" 
+  use "saadparwaiz1/cmp_luasnip" 
+
+  -- snippet
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
+
   --use { "catppuccin/nvim", as = "catppuccin" } 
   use "folke/tokyonight.nvim"
   use "nvim-telescope/telescope.nvim"
