@@ -31,7 +31,7 @@ local options = {
 	signcolumn = "yes",
 	wrap = false,
 	sidescrolloff = 8,
-	guifont = "monospace:h17",
+	--guifont = "FantasqueSansM Nerd Font Mono:h17",
   termguicolors = true
 }
 
