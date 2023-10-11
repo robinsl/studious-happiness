@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = { "go", "dart", "gitignore", "c_sharp", "bash", "dockerfile", "css", "html", "javascript", "json", "json5", "lua", "make", "markdown", "sql", "typescript", "yaml"},
+  ensure_installed = "all",
   sync_install = false,
   ignore_install = { "" },
   highlight = {
