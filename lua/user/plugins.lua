@@ -2,7 +2,7 @@ local fn = vim.fn
 
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
-if fn.empty(fn.glob(install_path)) > 0 then 
+if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system {
     "git",
     "clone",
@@ -37,18 +37,18 @@ packer.init {
 }
 
 return packer.startup(function(use)
-  use "wbthomason/packer.nvim" 
-  use "nvim-lua/popup.nvim" 
+  use "wbthomason/packer.nvim"
+  use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
 
   -- cmp
-  use "hrsh7th/nvim-cmp" 
-  use "hrsh7th/cmp-buffer" 
-  use "hrsh7th/cmp-path" 
-  use "hrsh7th/cmp-cmdline" 
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
-  use "saadparwaiz1/cmp_luasnip" 
+  use "saadparwaiz1/cmp_luasnip"
 
   -- snippet
   use 'L3MON4D3/LuaSnip'
@@ -62,7 +62,9 @@ return packer.startup(function(use)
   use "williamboman/mason.nvim" -- simple to use language server installer
   use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
   use 'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
-  
+
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
