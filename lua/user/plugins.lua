@@ -33,10 +33,8 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim",
   'jose-elias-alvarez/null-ls.nvim',
 
-  "nvim-treesitter/nvim-treesitter",
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-  }
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+
+  "startup-nvim/startup.nvim"
 })
 

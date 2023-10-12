@@ -3,8 +3,12 @@ if not status_ok then
   return
 end
 
+local parser_install_path = vim.fn.stdpath("data") .. "treesitter"
+vim.opt.runtimepath:append(parser_install_path)
+
 configs.setup {
-  ensure_installed = { "go", "dart", "gitignore", "c_sharp", "bash", "dockerfile", "css", "html", "javascript", "json", "json5", "lua", "make", "markdown", "sql", "typescript", "yaml"},
+  parser_install_path = parser_install_path,
+  ensure_installed = "all",
   sync_install = false,
   ignore_install = { "" },
   highlight = {
