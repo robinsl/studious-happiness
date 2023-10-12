@@ -7,7 +7,10 @@ local parser_install_path = vim.fn.stdpath("data") .. "treesitter"
 vim.opt.runtimepath:append(parser_install_path)
 
 configs.setup {
+<<<<<<< HEAD
   parser_install_path = parser_install_path,
+=======
+>>>>>>> main
   ensure_installed = "all",
   sync_install = false,
   ignore_install = { "" },
