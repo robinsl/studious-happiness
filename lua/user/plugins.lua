@@ -65,6 +65,9 @@ return packer.startup(function(use)
 
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
+  use "startup-nvim/startup.nvim"
+
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

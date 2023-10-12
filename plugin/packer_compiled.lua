@@ -159,6 +159,11 @@ _G.packer_plugins = {
     path = "/home/robin/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["startup.nvim"] = {
+    loaded = true,
+    path = "/home/robin/.local/share/nvim/site/pack/packer/start/startup.nvim",
+    url = "https://github.com/startup-nvim/startup.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/robin/.local/share/nvim/site/pack/packer/start/telescope.nvim",
