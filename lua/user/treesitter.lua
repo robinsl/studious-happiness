@@ -3,7 +3,11 @@ if not status_ok then
   return
 end
 
+local parser_install_path = vim.fn.stdpath("data") .. "treesitter"
+vim.opt.runtimepath:append(parser_install_path)
+
 configs.setup {
+  parser_install_path = parser_install_path,
   ensure_installed = "all",
   sync_install = false,
   ignore_install = { "" },
