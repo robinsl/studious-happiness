@@ -12,7 +12,7 @@ local servers = {
     }
   },
   jsonls = {
-    require("user.lsp.settings.jsonls").schemas
+    require("user.lsp_settings.jsonls").schemas
   }
 }
 
