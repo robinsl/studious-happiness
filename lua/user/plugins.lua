@@ -22,8 +22,8 @@ require("lazy").setup({
   "hrsh7th/cmp-nvim-lua",
   "saadparwaiz1/cmp_luasnip",
 
-  'L3MON4D3/LuaSnip',
-  'rafamadriz/friendly-snippets',
+  "L3MON4D3/LuaSnip",
+  "rafamadriz/friendly-snippets",
 
   "folke/tokyonight.nvim",
   "nvim-telescope/telescope.nvim",
@@ -35,5 +35,6 @@ require("lazy").setup({
 
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  "startup-nvim/startup.nvim"
+  "startup-nvim/startup.nvim",
+  "nvim-lualine/lualine.nvim",
 })
