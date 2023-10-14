@@ -43,11 +43,134 @@ M.general = {
   },
 }
 
-M.lspconfig = {}
+M.lspconfig = {
+  n = {
+    ["gD"] = {
+      function()
+        vim.lsp.buf.declaration()
+      end,
+      "LSP declaration",
+    },
+
+    ["gd"] = {
+      function()
+        vim.lsp.buf.definition()
+      end,
+      "LSP definition",
+    },
+
+    ["K"] = {
+      function()
+        vim.lsp.buf.hover()
+      end,
+      "LSP hover",
+    },
+
+    ["gi"] = {
+      function()
+        vim.lsp.buf.implementation()
+      end,
+      "LSP implementation",
+    },
+
+    ["<leader>ls"] = {
+      function()
+        vim.lsp.buf.signature_help()
+      end,
+      "LSP signature help",
+    },
+
+    ["<leader>D"] = {
+      function()
+        vim.lsp.buf.type_definition()
+      end,
+      "LSP definition type",
+    },
+
+    ["<leader>ra"] = {
+      function()
+        require("nvchad.renamer").open()
+      end,
+      "LSP rename",
+    },
+
+    ["<leader>ca"] = {
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      "LSP code action",
+    },
+
+    ["gr"] = {
+      function()
+        vim.lsp.buf.references()
+      end,
+      "LSP references",
+    },
+
+    ["<leader>f"] = {
+      function()
+        vim.diagnostic.open_float { border = "rounded" }
+      end,
+      "Floating diagnostic",
+    },
+
+    ["[d"] = {
+      function()
+        vim.diagnostic.goto_prev { float = { border = "rounded" } }
+      end,
+      "Goto prev",
+    },
+
+    ["]d"] = {
+      function()
+        vim.diagnostic.goto_next { float = { border = "rounded" } }
+      end,
+      "Goto next",
+    },
+
+    ["<leader>q"] = {
+      function()
+        vim.diagnostic.setloclist()
+      end,
+      "Diagnostic setloclist",
+    },
+
+    ["<leader>wa"] = {
+      function()
+        vim.lsp.buf.add_workspace_folder()
+      end,
+      "Add workspace folder",
+    },
+
+    ["<leader>wr"] = {
+      function()
+        vim.lsp.buf.remove_workspace_folder()
+      end,
+      "Remove workspace folder",
+    },
+
+    ["<leader>wl"] = {
+      function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end,
+      "List workspace folders",
+    },
+  },
+
+  v = {
+    ["<leader>ca"] = {
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      "LSP code action",
+    },
+  },
+}
 
 M.oil = {
   n = {
-    ["<leader>e"] = { "<CMD> oil <CR>" }
+    ["<leader>e"] = { "<CMD> Oil <CR>" }
   }
 }
 
@@ -67,13 +190,22 @@ M.telescope = {
 
 M.trouble = {
   n = {
-    ["<leader>xx"] = { function() require("trouble").toggle() end, "Toggle Trouble" }
+    ["<leader>xx"] = { function() require("trouble").toggle() end, "Toggle Trouble" },
+    ["<leader>xw"] = { function() require("trouble").toggle("workspace_diagnostics") end, "Toggle Trouble Workspace diagnostic" },
+    ["<leader>xd"] = { function() require("trouble").toggle("document_diagnostics") end, "Toggle Trouble Document diagnostic" },
+    ["<leader>xq"] = { function() require("trouble").toggle("quickfix") end, "Toggle Trouble Quickfix" },
+    ["<leader>xl"] = { function() require("trouble").toggle("loclist") end, "Toggle Trouble loclist" },
+    ["<leader>xR"] = { function() require("trouble").toggle("lsp_references") end, "Toggle Trouble LSP references" },
   }
 }
 
 M.whichkey = {}
 
-M.neogit = {}
+M.neogit = {
+  n = {
+    ["<C-c>"] = { "<CMD> Neogit <CR>", "Open Neogit" },
+  }
+}
 
 M.load_mappings = function(section, opts)
   for mode, values in pairs(section) do
