@@ -65,4 +65,5 @@ require("lazy").setup({
       vim.o.timeoutlen = 300
     end,
   },
+  "folke/trouble.nvim",
 })

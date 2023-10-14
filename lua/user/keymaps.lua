@@ -1,62 +1,102 @@
-local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
+local M = {}
+local merge_tb = vim.tbl_deep_extend
 
-local keymap = vim.api.nvim_set_keymap
-
--- Setup Leader key
-keymap("", "<Space>", "<Nop>", opts)
+vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
+M.general = {
+  i = {
+    ["<C-b>"] = { "<ESC>^i", "Beginning of line" },
+    ["<C-e>"] = { "<End>", "End of line" },
 
--- Normal
--- Change Window without ctrl + w before
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+    ["<C-h>"] = { "<Left>", "Move left" },
+    ["<C-j>"] = { "<Down>", "Move down" },
+    ["<C-k>"] = { "<Up>", "Move up" },
+    ["<C-l>"] = { "<Right>", "Move right" },
+  },
+  n = {
+    ["<Esc>"] = { ":noh <CR>", "Clear highlights" },
 
--- Explorator
-keymap("n", "<leader>e", "<CMD>Oil<Cr>", opts)
+    ["<C-h>"] = { "<C-w>h", "Window left" },
+    ["<C-l>"] = { "<C-w>l", "Window right" },
+    ["<C-j>"] = { "<C-w>j", "Window down" },
+    ["<C-k>"] = { "<C-w>k", "Window up" },
 
--- Resize
-keymap("n", "<C-Up>", ":resize +2<CR>", opts)
-keymap("n", "<C-Down>", ":resize -2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+    ["<A-j>"] = { ":m .+1<CR>==", "Switch line position down" },
+    ["<A-k>"] = { ":m .-2<CR>==", "Switch line position up" },
 
--- Esc from insert mode
-keymap("i", "jk", "<ESC>", opts)
+    ["<leader>vtl"] = { "<CMD> set nu! <CR>", "(V)im (T)oggle (L)ine" },
+    ["<leader>vtr"] = { "<CMD> set rnu! <CR>", "(V)im (T)oggle (R)elative line" },
+    ["<leader>vnb"] = { "<CMD> aner <CR>", "(V)im (N)ew (B)uffer" },
 
--- Fix change mode 
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+    ["<leader>fm"] = {
+      function()
+        vim.lsp.buf.format { async = true }
+      end,
+      "LSP (F)or(M)at"
+    },
+  },
+  v = {
+    ["<A-j>"] = { ":m .+1<CR>==", "Switch line position down" },
+    ["<A-k>"] = { ":m .-2<CR>==", "Switch line position up" },
+  },
+}
 
--- Change line position
-keymap("n", "<A-j>", ":m .+1<CR>==", opts)
-keymap("n", "<A-k>", ":m .-2<CR>==", opts)
+M.lspconfig = {}
 
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+M.oil = {
+  n = {
+    ["<leader>e"] = { "<CMD> oil <CR>" }
+  }
+}
 
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+M.telescope = {
+  n = {
+    ["<leader>ff"] = { "<CMD> Telescope find_files <CR>", "Find files" },
+    ["<leader>fa"] = { "<CMD> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
+    ["<leader>fw"] = { "<CMD> Telescope live_grep <CR>", "Live grep" },
+    ["<leader>fb"] = { "<CMD> Telescope buffers <CR>", "Find buffers" },
+    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
+    ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
+    ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+    ["<leader>fc"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+    ["<leader>fs"] = { "<cmd> Telescope git_status <CR>", "Git status" },
+  }
+}
 
--- Terminal --
--- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+M.trouble = {
+  n = {
+    ["<leader>xx"] = { function() require("trouble").toggle() end, "Toggle Trouble" }
+  }
+}
+
+M.whichkey = {}
+
+M.neogit = {}
+
+M.load_mappings = function(section, opts)
+  for mode, values in pairs(section) do
+    local default_opts = merge_tb("force", { mode = mode }, opts or {})
+    for keybindind, mapping_info in pairs(values) do
+      local using_opts = merge_tb("force", default_opts, mapping_info.opts or {})
+
+      mapping_info.opts, using_opts.mode = nil, nil
+      using_opts.desc = mapping_info[2]
+
+      vim.keymap.set(mode, keybindind, mapping_info[1], using_opts)
+    end
+  end
+end
+
+M.load_all_mapping = function ()
+  M.load_mappings(M.general)
+  M.load_mappings(M.lspconfig)
+  M.load_mappings(M.oil)
+  M.load_mappings(M.telescope)
+  M.load_mappings(M.trouble)
+  M.load_mappings(M.neogit)
+end
+
+return M
 

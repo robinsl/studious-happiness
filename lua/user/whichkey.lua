@@ -16,11 +16,10 @@ local opts = {
 }
 
 local mappings = {
-  ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["q"] = { "<cmd>q!<CR>", "Quit" },
 }
 
 which_key.register(mappings, opts)
 which_key.setup({
   trigger = "auto"
 })
+

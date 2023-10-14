@@ -1,5 +1,4 @@
 require "user.plugins"
-require "user.keymaps"
 require "user.options"
 require "user.colorscheme"
 require "user.cmp"
@@ -10,4 +9,6 @@ require "user.lualine"
 require "user.neogit"
 require "user.whichkey"
 require "user.oil"
+require "user.trouble"
 require "user.telescope"
+require "user.keymaps".load_all_mapping()
