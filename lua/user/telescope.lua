@@ -8,7 +8,7 @@ if not project_status_ok then
   return
 end
 
-project.setup({})
 telescope.load_extension('projects')
 
 telescope.setup {}
+project.setup({})

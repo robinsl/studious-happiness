@@ -14,6 +14,14 @@ M.general = {
     ["<C-j>"] = { "<Down>", "Move down" },
     ["<C-k>"] = { "<Up>", "Move up" },
     ["<C-l>"] = { "<Right>", "Move right" },
+
+    ["<A-a>"] = { function () require("copilot.suggestion").accept() end, "Copilot Accept" },
+    ["<A-s>"] = { function () require("copilot.suggestion").dismiss() end, "Copilot Reject" },
+    ["<A-]>"] = { function () require("copilot.suggestion").next() end, "Copilot Next suggestion" },
+    ["<A-[>"] = { function () require("copilot.suggestion").prev() end, "Copilot Previous suggestion" },
+    ["<A-l>"] = { function () require("copilot.suggestion").accept_line() end, "Copilot Accept Line" },
+    ["<A-w>"] = { function () require("copilot.suggestion").accept_word() end, "Copilot Accept Word" },
+    ["<A-c>"] = { function () require("copilot.suggestion").toggle_auto_trigger() end, "Copilot Toggle auto trigger" },
   },
   n = {
     ["<Esc>"] = { ":noh <CR>", "Clear highlights" },
@@ -185,6 +193,7 @@ M.telescope = {
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
     ["<leader>fc"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
     ["<leader>fs"] = { "<cmd> Telescope git_status <CR>", "Git status" },
+    ["<leader>fp"] = { ":lua require'telescope'.extensions.projects.projects{}<CR>", "Project" },
   }
 }
 

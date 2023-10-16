@@ -15,6 +15,12 @@ require("lazy").setup({
   "nvim-lua/plenary.nvim",
   "hrsh7th/nvim-cmp",
 
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+  },
+
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",

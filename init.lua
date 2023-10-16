@@ -11,4 +11,5 @@ require "user.whichkey"
 require "user.oil"
 require "user.trouble"
 require "user.telescope"
+require "user.copilot"
 require "user.keymaps".load_all_mapping()
